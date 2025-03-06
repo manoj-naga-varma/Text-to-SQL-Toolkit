@@ -1,6 +1,5 @@
 streamlit
 google-generativeai
 pandas
-sqlite3
 dotenv
 pip==25.0.1
