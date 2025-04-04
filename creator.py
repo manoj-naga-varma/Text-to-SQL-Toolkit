@@ -6,11 +6,11 @@ import pandas as pd
 def create_database(table_name, columns):
     conn = sqlite3.connect("dynamic.db")
     cur = conn.cursor()
-    
+
     # Construct CREATE TABLE SQL statement
     column_definitions = ", ".join([f"{col_name} {col_type}" for col_name, col_type in columns.items()])
-    sql_query = f"CREATE TABLE IF NOT EXISTS {table_name} ({column_definitions})"
-    
+    sql_query = f"CREATE TABLE IF NOT EXISTS '{table_name}' ({column_definitions})"
+
     cur.execute(sql_query)
     conn.commit()
     conn.close()
@@ -21,10 +21,10 @@ def insert_record(table_name, column_names, values):
     try:
         conn = sqlite3.connect("dynamic.db")
         cur = conn.cursor()
-        
+
         placeholders = ", ".join(["?" for _ in values])
-        sql_query = f"INSERT INTO {table_name} ({', '.join(column_names)}) VALUES ({placeholders})"
-        
+        sql_query = f"INSERT INTO '{table_name}' ({', '.join(column_names)}) VALUES ({placeholders})"
+
         cur.execute(sql_query, values)
         conn.commit()
         conn.close()
@@ -34,10 +34,14 @@ def insert_record(table_name, column_names, values):
 
 # Function to fetch records from a table
 def fetch_records(table_name):
-    conn = sqlite3.connect("dynamic.db")
-    df = pd.read_sql(f"SELECT * FROM {table_name}", conn)
-    conn.close()
-    return df
+    try:
+        conn = sqlite3.connect("dynamic.db")
+        df = pd.read_sql(f'SELECT * FROM "{table_name}"', conn)
+        conn.close()
+        return df
+    except Exception as e:
+        st.error(f"❌ Could not fetch records: {e}")
+        return pd.DataFrame()
 
 def run_schema_creator():
     st.title("🗂️ Dynamic Database Schema Creator")
@@ -68,10 +72,12 @@ def run_schema_creator():
 
     if table_name and columns:
         with st.form("insert_form"):
-            values = [st.text_input(f"Enter {col}") if col_type == "TEXT" else 
-                      st.number_input(f"Enter {col}", step=1 if col_type == "INTEGER" else 0.1)
-                      for col, col_type in columns.items()]
-            
+            values = [
+                st.text_input(f"Enter {col}") if col_type == "TEXT" else 
+                st.number_input(f"Enter {col}", step=1 if col_type == "INTEGER" else 0.1)
+                for col, col_type in columns.items()
+            ]
+
             submit = st.form_submit_button("📥 Insert Record")
 
         if submit:
