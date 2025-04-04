@@ -5,17 +5,15 @@ import pandas as pd
 # Function to create a database and user-defined table
 def create_database(table_name, columns):
     conn = sqlite3.connect("dynamic.db")
-    cursor = conn.cursor()
-    cursor.execute('''
-    CREATE TABLE IF NOT EXISTS teacher (
-        id INTEGER PRIMARY KEY,
-        name TEXT,
-        subject TEXT
-    )
-''')
+    cur = conn.cursor()
+
+    # Construct CREATE TABLE SQL statement
+    column_definitions = ", ".join([f"{col_name} {col_type}" for col_name, col_type in columns.items()])
+    sql_query = f"CREATE TABLE IF NOT EXISTS '{table_name}' ({column_definitions})"
+
+    cur.execute(sql_query)
     conn.commit()
     conn.close()
-
     st.success(f"✅ Table '{table_name}' created successfully!")
 
 # Function to insert records dynamically
