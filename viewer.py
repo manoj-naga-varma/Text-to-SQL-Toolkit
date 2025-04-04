@@ -54,7 +54,6 @@ def run_table_viewer():
                 if delete_table(table_name):
                     st.success(f"Table '{table_name}' deleted successfully.")
                     tables = get_tables()  # Refresh table list
-                    st.rerun()  # Instead of st.experimental_rerun()
-
+                    st.rerun()  # Rerun the app to update the UI
     else:
         st.warning("⚠️ No tables found. Create tables first in 'Schema Creator'.")
