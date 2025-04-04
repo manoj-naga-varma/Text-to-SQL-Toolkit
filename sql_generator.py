@@ -110,7 +110,8 @@ The SQL database contains a table named {selected_table}.
 Your task is to generate **only** the SQL query **without any explanations**.
 
 ### **Rules:**
-1️⃣ Do **not** include ``` in the beginning or end of the output.  
+1️⃣ Do **not** include 
+in the beginning or end of the output.  
 2️⃣ Do **not** include the word **SQL** in the output.  
 3️⃣ Output only the **pure SQL query**.
 4️⃣ Ensure that **all string comparisons are case-insensitive** by converting both the table values and input to **lowercase**.
@@ -221,7 +222,8 @@ A: SELECT subject FROM {selected_table} WHERE LOWER(designation) = 'hod';
 Q: Get students who are in both section 'A' and section 'B' (assuming a student can be in multiple sections).  
 A: SELECT NAME FROM {selected_table} WHERE SECTION = 'A' INTERSECT SELECT NAME FROM {selected_table} WHERE SECTION = 'B';  
 
-Now, given the following question, generate an SQL query **without explanations, without ``` at the beginning or end, and without the word SQL in the output**.
+Now, given the following question, generate an SQL query **without explanations, without
+ at the beginning or end, and without the word SQL in the output**.
 """
     ]
 
