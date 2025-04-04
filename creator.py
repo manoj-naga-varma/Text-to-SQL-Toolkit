@@ -38,20 +38,12 @@ def insert_record(table_name, column_names, values):
 def fetch_records(table_name):
     try:
         conn = sqlite3.connect("dynamic.db")
-        cursor = conn.cursor()
-
-        # Check if table exists
-        cursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name=?", (table_name,))
-        if not cursor.fetchone():
-            conn.close()
-            return pd.DataFrame()  # return empty DataFrame if table doesn't exist
-
         df = pd.read_sql(f'SELECT * FROM "{table_name}"', conn)
         conn.close()
         return df
     except Exception as e:
+        st.error(f"❌ Could not fetch records: {e}")
         return pd.DataFrame()
-
 
 def run_schema_creator():
     st.title("🗂️ Dynamic Database Schema Creator")
