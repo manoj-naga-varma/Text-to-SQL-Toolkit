@@ -225,10 +225,9 @@ Now, given the following question, generate an SQL query **without explanations,
 """
     ]
 
-
+    
     # If submit button is clicked
     if submit:
-
         with st.spinner("Generating SQL query... 💡"):
             sql_query = get_gemini_response(question, prompt)
 
