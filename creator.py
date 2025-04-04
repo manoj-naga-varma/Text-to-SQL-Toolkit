@@ -5,15 +5,17 @@ import pandas as pd
 # Function to create a database and user-defined table
 def create_database(table_name, columns):
     conn = sqlite3.connect("dynamic.db")
-    cur = conn.cursor()
-
-    # Construct CREATE TABLE SQL statement
-    column_definitions = ", ".join([f"{col_name} {col_type}" for col_name, col_type in columns.items()])
-    sql_query = f"CREATE TABLE IF NOT EXISTS '{table_name}' ({column_definitions})"
-
-    cur.execute(sql_query)
+    cursor = conn.cursor()
+    cursor.execute('''
+    CREATE TABLE IF NOT EXISTS teacher (
+        id INTEGER PRIMARY KEY,
+        name TEXT,
+        subject TEXT
+    )
+''')
     conn.commit()
     conn.close()
+
     st.success(f"✅ Table '{table_name}' created successfully!")
 
 # Function to insert records dynamically
@@ -36,12 +38,20 @@ def insert_record(table_name, column_names, values):
 def fetch_records(table_name):
     try:
         conn = sqlite3.connect("dynamic.db")
+        cursor = conn.cursor()
+
+        # Check if table exists
+        cursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name=?", (table_name,))
+        if not cursor.fetchone():
+            conn.close()
+            return pd.DataFrame()  # return empty DataFrame if table doesn't exist
+
         df = pd.read_sql(f'SELECT * FROM "{table_name}"', conn)
         conn.close()
         return df
     except Exception as e:
-        st.error(f"❌ Could not fetch records: {e}")
         return pd.DataFrame()
+
 
 def run_schema_creator():
     st.title("🗂️ Dynamic Database Schema Creator")
