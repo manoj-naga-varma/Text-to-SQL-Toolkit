@@ -225,14 +225,9 @@ Now, given the following question, generate an SQL query **without explanations,
 """
     ]
 
-    
-    if 'api_calls' not in st.session_state:
-        st.session_state.api_calls = 0
 
     # If submit button is clicked
     if submit:
-        st.session_state.api_calls += 1
-        st.caption(f"🧮 API calls used this session: {st.session_state.api_calls}")
 
         with st.spinner("Generating SQL query... 💡"):
             sql_query = get_gemini_response(question, prompt)
