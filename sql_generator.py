@@ -74,7 +74,7 @@ def run_sql_generator():
     st.subheader("\U0001F4DD Enter Your Query")
 
     tables = get_tables("dynamic.db")
-    selected_table = st.selectbox("Select Table (optional)", ["All Tables"] + tables, key="table_select")
+    #selected_table = st.selectbox("Select Table (optional)", ["All Tables"] + tables, key="table_select")
     question = st.text_input("Write your question here:", key="input")
     submit = st.button("\U0001F680 Generate SQL & Fetch Data")
 
