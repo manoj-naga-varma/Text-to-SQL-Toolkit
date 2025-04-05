@@ -105,8 +105,7 @@ def run_sql_generator():
     # Expanded prompt with 30+ diverse SQL examples
     prompt = [f"""
 You are an expert in converting English questions into SQL queries.
-"The SQL database contains the following tables: {', '.join(tables)}."
-"The table selected from the SQL database is {selected_table}."
+The SQL database contains a table named {selected_table}.
 
 Your task is to generate **only** the SQL query **without any explanations**.
 
@@ -116,8 +115,6 @@ in the beginning or end of the output.
 2️⃣ Do **not** include the word **SQL** in the output.  
 3️⃣ Output only the **pure SQL query**.
 4️⃣ Ensure that **all string comparisons are case-insensitive** by converting both the table values and input to **lowercase**.
-5️⃣ When using JOINs, always use **aliases** and **rename overlapping column names** to avoid duplication. For example:  
-SELECT t.name AS teacher_name, r.name AS rater_name FROM teachers t JOIN ratings r ON t.name = r.name;
 
 
 ### **Example Queries:**  
