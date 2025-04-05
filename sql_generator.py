@@ -105,7 +105,8 @@ def run_sql_generator():
     # Expanded prompt with 30+ diverse SQL examples
     prompt = [f"""
 You are an expert in converting English questions into SQL queries.
-The SQL database contains a table named {selected_table}.
+"The SQL database contains the following tables: {', '.join(tables)}."
+"The table selected from the SQL database is {selected_table}."
 
 Your task is to generate **only** the SQL query **without any explanations**.
 
