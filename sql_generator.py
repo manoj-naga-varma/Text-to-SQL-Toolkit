@@ -184,14 +184,74 @@ Q: Find students in class 10 and section B.
 A: SELECT * FROM {selected_table} WHERE CLASS = '10' AND SECTION = 'B';  
 
 #### **Advanced Queries with JOINs**
-Q: Retrieve all students along with their teacher names (assuming 'teachers' table exists).  
-A: SELECT s.NAME, t.TEACHER_NAME FROM {selected_table} s JOIN teachers t ON s.TEACHER_ID = t.ID;  
+Q: Retrieve all students along with their teacher names (assuming a teachers table exists).
+A: SELECT s.name, t.teacher_name FROM {selected_table} s JOIN teachers t ON LOWER(s.teacher_id) = LOWER(t.id);
 
-Q: Get the list of students along with the subjects they are studying (assuming 'subjects' table exists).  
-A: SELECT s.NAME, sub.SUBJECT_NAME FROM {selected_table} s JOIN subjects sub ON s.SUBJECT_ID = sub.ID;  
+Q: Get the list of students along with the subjects they are studying (assuming a subjects table exists).
+A: SELECT s.name, sub.subject_name FROM {selected_table} s JOIN subjects sub ON LOWER(s.subject_id) = LOWER(sub.id);
 
-Q: Find students who have not received marks and their class names (assuming 'classes' table exists).  
-A: SELECT s.NAME, c.CLASS_NAME FROM {selected_table} s LEFT JOIN classes c ON s.CLASS_ID = c.ID WHERE s.MARKS IS NULL;  
+Q: Find students who have not received marks and their class names (assuming a classes table exists).
+A: SELECT s.name, c.class_name FROM {selected_table} s LEFT JOIN classes c ON LOWER(s.class_id) = LOWER(c.id) WHERE s.marks IS NULL;
+
+Q: What is the salary of the teacher with the designation HoD?
+A: SELECT s.salary FROM teacher t JOIN salary s ON LOWER(t.name) = LOWER(s.name) WHERE LOWER(t.designation) = LOWER('HoD');
+
+Q: List the names and salaries of all teachers.
+A: SELECT t.name, s.salary FROM teacher t JOIN salary s ON LOWER(t.name) = LOWER(s.name);
+
+Q: Get the subject and salary of teachers with a rating above 4.
+A: SELECT t.subject, s.salary FROM teacher t JOIN salary s ON LOWER(t.name) = LOWER(s.name) WHERE t.rating > 4;
+
+Q: Find teachers earning more than 50,000.
+A: SELECT t.name, t.designation FROM teacher t JOIN salary s ON LOWER(t.name) = LOWER(s.name) WHERE s.salary > 50000;
+
+Q: Get the names of HoDs who earn less than 60,000.
+A: SELECT t.name FROM teacher t JOIN salary s ON LOWER(t.name) = LOWER(s.name) WHERE LOWER(t.designation) = LOWER('HoD') AND s.salary < 60000;
+
+Q: Show the designation and salary of each teacher sorted by salary descending.
+A: SELECT t.designation, s.salary FROM teacher t JOIN salary s ON LOWER(t.name) = LOWER(s.name) ORDER BY s.salary DESC;
+
+Q: Who are the teachers without a recorded salary?
+A: SELECT t.name FROM teacher t LEFT JOIN salary s ON LOWER(t.name) = LOWER(s.name) WHERE s.salary IS NULL;
+
+Q: Get the total salary paid to all teachers.
+A: SELECT SUM(s.salary) FROM teacher t JOIN salary s ON LOWER(t.name) = LOWER(s.name);
+
+Q: What is the average salary for each designation?
+A: SELECT t.designation, AVG(s.salary) AS avg_salary FROM teacher t JOIN salary s ON LOWER(t.name) = LOWER(s.name) GROUP BY t.designation;
+
+Q: Show the top 3 highest-paid teachers with their subjects.
+A: SELECT t.name, t.subject, s.salary FROM teacher t JOIN salary s ON LOWER(t.name) = LOWER(s.name) ORDER BY s.salary DESC LIMIT 3;
+
+Q: List all teachers and their salary if available.
+A: SELECT t.name, s.salary FROM teacher t LEFT JOIN salary s ON LOWER(t.name) = LOWER(s.name);
+
+Q: Who are the teachers for whom salary details are not available?
+A: SELECT t.name FROM teacher t LEFT JOIN salary s ON LOWER(t.name) = LOWER(s.name) WHERE s.salary IS NULL;
+
+Q: Show all salary records even if a teacher entry doesn't exist.
+A: SELECT s.name, s.salary FROM salary s LEFT JOIN teacher t ON LOWER(t.name) = LOWER(s.name);
+
+Q: Show all records from both teacher and salary tables, even if there’s no match.
+A: SELECT t.name, t.designation, s.salary FROM teacher t LEFT JOIN salary s ON LOWER(t.name) = LOWER(s.name) UNION SELECT s.name, NULL AS designation, s.salary FROM salary s LEFT JOIN teacher t ON LOWER(t.name) = LOWER(s.name) WHERE t.name IS NULL;
+
+Q: Show details of teachers who are listed in the salary table.
+A: SELECT * FROM teacher WHERE LOWER(name) IN (SELECT LOWER(name) FROM salary);
+
+Q: List teachers who are not in the salary table.
+A: SELECT * FROM teacher WHERE LOWER(name) NOT IN (SELECT LOWER(name) FROM salary);
+
+Q: Find all teachers with known salary amounts.
+A: SELECT t.name, s.salary FROM teacher t JOIN salary s ON LOWER(t.name) = LOWER(s.name) WHERE s.salary IS NOT NULL;
+
+Q: Show teachers whose salary is more than the average salary.
+A: SELECT t.name, s.salary FROM teacher t JOIN salary s ON LOWER(t.name) = LOWER(s.name) WHERE s.salary > (SELECT AVG(salary) FROM salary);
+
+Q: List teachers with designation ‘Professor’ and salary above 70,000.
+A: SELECT t.name, s.salary FROM teacher t JOIN salary s ON LOWER(t.name) = LOWER(s.name) WHERE LOWER(t.designation) = LOWER('Professor') AND s.salary > 70000;
+
+Q: Show teachers and their salary, or 0 if salary is not recorded.
+A: SELECT t.name, COALESCE(s.salary, 0) AS salary FROM teacher t LEFT JOIN salary s ON LOWER(t.name) = LOWER(s.name);
 
 #### **More Advanced Queries**
 Q: Find the section with the highest average marks.  
@@ -217,7 +277,6 @@ A: SELECT * FROM {selected_table} WHERE rating = (SELECT MIN(rating) FROM {selec
 
 Q: Which subject is the teacher with the role or designation or position HoD teaching?
 A: SELECT subject FROM {selected_table} WHERE LOWER(designation) = 'hod';
-
 
 Q: Get students who are in both section 'A' and section 'B' (assuming a student can be in multiple sections).  
 A: SELECT NAME FROM {selected_table} WHERE SECTION = 'A' INTERSECT SELECT NAME FROM {selected_table} WHERE SECTION = 'B';  
