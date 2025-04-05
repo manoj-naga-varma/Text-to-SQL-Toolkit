@@ -276,6 +276,7 @@ A: SELECT NAME FROM table_name WHERE SECTION = 'A' INTERSECT SELECT NAME FROM ta
 
         with st.spinner("Generating SQL query..."):
             sql_query = get_gemini_response(question, full_prompt[0])
+            sql_query = sql_query.strip().replace("```sql", "").replace("```", "").strip()
 
         st.subheader("\U0001F4DD Generated SQL Query:")
         st.code(sql_query, language="sql")
