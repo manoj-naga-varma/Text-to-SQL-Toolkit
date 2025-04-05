@@ -253,6 +253,15 @@ A: SELECT t.name, s.salary FROM teacher t JOIN salary s ON LOWER(t.name) = LOWER
 Q: Show teachers and their salary, or 0 if salary is not recorded.
 A: SELECT t.name, COALESCE(s.salary, 0) AS salary FROM teacher t LEFT JOIN salary s ON LOWER(t.name) = LOWER(s.name);
 
+Q: Show all teachers whose salary is missing (no match in salary table).
+A: SELECT t.* FROM teacher t  LEFT JOIN salary s ON LOWER(t.name) = LOWER(s.name)  WHERE s.salary IS NULL;
+
+Q: Which teacher (without all available details) has the highest salary?
+A: SELECT t.*, s.salary FROM salary s LEFT JOIN teacher t ON LOWER(t.name) = LOWER(s.name) WHERE s.salary = (SELECT MAX(salary) FROM salary);
+
+Q: What is the salary of the teacher with the highest salary and details of that teacher. Join the tables teacher and salary on the column name.
+A: 
+
 #### **More Advanced Queries**
 Q: Find the section with the highest average marks.  
 A: SELECT SECTION, AVG(MARKS) AS AVG_MARKS FROM {selected_table} GROUP BY SECTION ORDER BY AVG_MARKS DESC LIMIT 1;  
