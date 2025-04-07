@@ -13,6 +13,7 @@ A Streamlit application that allows users to:
 - **Dynamic Query Execution**: Fetch data from the database and display results.  
 
 Please click on the link below to access the app
+
 https://t2sql-draft-2-by-mnv.streamlit.app/
 ---
 
