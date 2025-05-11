@@ -1,27 +1,36 @@
-# 🧠 Gemini-Powered SQL Query Generator
+# 🧠 Text-to-SQL Toolkit with Gemini AI
 
-## 📌 Features
+A powerful and user-friendly Streamlit application to **transform natural language into SQL queries** and manage your database visually.
 
-A Streamlit application that allows users to:  
-✅ Generate SQL queries from natural language using Google's Gemini AI.  
-✅ Create, view, and delete tables in an SQLite database.  
-✅ Insert and retrieve records dynamically.  
+> 🌐 Live App: [Click to Launch](https://t2sql-draft-2-by-mnv.streamlit.app/)
 
-
-- **AI-Powered SQL Query Generation**: Converts user questions into SQL queries.  
-- **Database Management**: Create tables, insert data, and delete tables manually.  
-- **Dynamic Query Execution**: Fetch data from the database and display results.  
-
-Please click on the link below to access the app
-
-https://text-to-sql-by-mnv.streamlit.app/
 ---
 
+## 🚀 Features
 
-## 📂 Installation
+✅ **Natural Language SQL Generator** using Google Gemini API  
+✅ **Schema Creator** – visually design database tables  
+✅ **Data Importer** – upload CSV/Excel to populate tables  
+✅ **Table Viewer** – view, export, and delete database tables  
+✅ **End-to-End Workflow** – from data structure to querying in one place  
 
-### 1️⃣ Clone the Repository  
+---
 
+## 🧩 App Modules
+
+| Tool | Description |
+|------|-------------|
+| 🏠 **Home Page** | Overview dashboard, stats, feature highlights |
+| 📐 **Schema Creator** | Define and create SQLite tables dynamically |
+| 📥 **Data Importer** | Upload CSV/XLSX files and import data with type inference |
+| 📊 **Table Viewer** | View, filter, export, and delete existing tables |
+| 📝 **SQL Query Generator** | Ask plain-English questions and get SQL instantly |
+
+---
+
+## ⚙️ Installation
+
+### 1️⃣ Clone the repository
 ```bash
 git clone https://github.com/your-repo/sql-query-generator.git
 cd sql-query-generator
