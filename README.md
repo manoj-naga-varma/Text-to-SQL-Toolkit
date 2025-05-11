@@ -34,3 +34,79 @@ A powerful and user-friendly Streamlit application to **transform natural langua
 ```bash
 git clone https://github.com/your-repo/sql-query-generator.git
 cd sql-query-generator
+```
+
+### 2️⃣ Install dependencies
+```bash
+pip install -r requirements.txt
+```
+
+### 3️⃣ Add your Gemini API key  
+Create a `.env` file in the root directory:
+```
+GOOGLE_API_KEY=your_actual_api_key_here
+```
+
+---
+
+## ▶️ Run the App
+
+```bash
+streamlit run app2.py
+```
+
+---
+
+## 📁 Folder Structure
+
+```
+.
+├── app2.py                # Main Streamlit multipage app
+├── creator.py             # Schema creation logic
+├── data_importer.py       # File uploader and data importer
+├── viewer.py              # Table viewer and delete module
+├── sql_generator.py       # Gemini-powered SQL generation
+├── home.py                # Homepage dashboard and UI
+├── dynamic.db             # SQLite database (auto-created)
+├── requirements.txt       # Python dependencies
+├── .streamlit/
+│   └── config.toml        # Light theme and UI config
+└── README.md              # You are here!
+```
+
+---
+
+## 📎 Requirements
+
+See `requirements.txt`, but main packages include:
+- `streamlit`
+- `pandas`
+- `openpyxl`, `xlrd` (Excel support)
+- `google-generativeai`
+- `dotenv`
+
+---
+
+## 💡 Example Questions
+
+Try these in the SQL Generator:
+- *Show me all employees in the Engineering department*
+- *What is the average salary of managers?*
+- *List products with inventory less than 20*
+- *Find the total sales by region for Q1*
+
+---
+
+## 👥 Credits
+
+Developed by:
+- Jeremiah Varghese Reji  
+- Abishek M  
+- Chekuri Manoj Naga Varma  
+- Nagirimadugu Vamsi Reddy
+
+---
+
+## 📄 License
+
+This project is for educational and personal use. For commercial use, please contact the authors.
