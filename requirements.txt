@@ -3,3 +3,4 @@ google-generativeai
 pandas
 dotenv
 pip==25.0.1
+openpyxl
