@@ -1,4 +1,4 @@
-# 🧠 Text-to-SQL Toolkit with Gemini AI
+# 🧠 Text-to-SQL Toolkit
 
 A powerful and user-friendly Streamlit application to **transform natural language into SQL queries** and manage your database visually.
 
@@ -100,10 +100,11 @@ Try these in the SQL Generator:
 ## 👥 Credits
 
 Developed by:
-- Jeremiah Varghese Reji  
-- Abishek M  
-- Chekuri Manoj Naga Varma  
-- Nagirimadugu Vamsi Reddy
+
+- Chekuri Manoj Naga Varma
+- Jeremiah Varghese Reji (Teammate 1)
+- Abishek M (Teammate 2) 
+- Nagirimadugu Vamsi Reddy (Teammate 3)
 
 ---
 
