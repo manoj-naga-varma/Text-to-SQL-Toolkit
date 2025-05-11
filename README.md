@@ -14,7 +14,7 @@ A Streamlit application that allows users to:
 
 Please click on the link below to access the app
 
-https://t2sql-draft-2-by-mnv.streamlit.app/
+https://text-to-sql-by-mnv.streamlit.app/
 ---
 
 
