@@ -99,7 +99,7 @@ Try these in the SQL Generator:
 
 ## 👥 Credits
 
-Developed by:
+Developers:
 
 - Chekuri Manoj Naga Varma
 - Jeremiah Varghese Reji (Teammate 1)
@@ -110,4 +110,4 @@ Developed by:
 
 ## 📄 License
 
-This project is for educational and personal use. For commercial use, please contact the authors.
+This project is for educational and personal use. For commercial use, please contact the developers.
