@@ -111,3 +111,9 @@ Developers:
 ## 📄 License
 
 This project is for educational and personal use. For commercial use, please contact the developers.
+
+---
+
+## If the SQL Query Generation is not being performed, it might be due to the API Key token limit expiration. Please inform to the developer, or leave a comment here
+
+
